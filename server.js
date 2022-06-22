@@ -2,21 +2,23 @@ const express = require("express");
 const app = express();
 
 const mongoose = require("mongoose");
-const passport = require("passport")
+const passport = require("passport");
 const MongoStore = require ("connect-mongo");
-const session = require("express-session")
-const cors = require('cors')
+const session = require("express-session");
+const cors = require('cors');
 const User = require("./models/user");
-require("dotenv").config()
+const helmet = require("helmet");
+require("dotenv").config();
 
-app.use(cors())
+app.use(cors());
+app.use(helmet());
 app.use(express.json());
-app.use(express.static(__dirname+"/client/public"))
+app.use(express.static(__dirname+"/client/public"));
 
 mongoose.connect(process.env.DATABASE_URL, { useNewURLParser: true });
 const db = mongoose.connection;
-db.on("error", (error) => console.error(error))
-db.once("open", () => console.log("Connected to DB"))
+db.on("error", (error) => console.error(error));
+db.once("open", () => console.log("Connected to DB"));
 
 const sessionMiddleware = session({
     resave:true,
