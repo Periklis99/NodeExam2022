@@ -8,10 +8,46 @@
 
 	<link rel='icon' type='image/png' href='/favicon.png'>
 	<link rel='stylesheet' href='/build/bundle.css'>
-
 	<script defer src='/build/bundle.js'></script>
+	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+
+	
 </head>
 
 <body>
+<style>
+	div.cc-compliance{
+		background-color: rgb(122, 7, 97);
+
+	}
+	 div.cc-revoke{
+		position:fixed;
+		bottom:38px;
+		background-color: rgb(122, 7, 97);
+	 }
+
+	div.cc-window{
+		background-color: rgb(122, 7, 97);
+		position:fixed;
+		bottom:0px;
+	}
+</style>
+
+	<script>
+		
+		window.cookieconsent.initialise({
+  container: document.getElementById("cookieconsent"),
+  palette:{
+    popup: { background: "#1aa3ff" },
+    button: { background: "#e0e0e0" },
+  },
+  revokable: true,
+  onStatusChange: function(status) {
+    console.log(this.hasConsented() ?
+    'enable cookies' : 'disable cookies');
+  },
+  "theme": "edgeless"
+});
+	</script>
 </body>
 </html>

@@ -22,21 +22,8 @@ var io = require("socket.io")(http, {
 http.listen(3536, function(){
 console.log("Successfully Connected Node Server");
 
- io.on("connection", function(socket){
-    console.log(socket)
-
-  });
+ io.on("connection", function(socket){});
 });
-
-/*const io = require("socket.io")(http, {
-    cors: {
-        origin: "http://localhost:8080",
-        methods: ["GET", "POST"]
-    }
-})
-io.on('connection', client => { "http://localhost:8080"});
-http.listen(3536)*/
-
 
 
 app.use(cors());
@@ -56,10 +43,7 @@ const sessionMiddleware = session({
     store: MongoStore.create({mongoUrl: process.env.DATABASE_URL})
   })
   app.use(sessionMiddleware);
-
-
-
-
+ 
 
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());

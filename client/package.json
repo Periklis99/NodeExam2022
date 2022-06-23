@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "cookie-consent-js": "^2.1.6",
+    "cookieconsent": "^3.1.1",
     "socket.io-client": "^4.5.1",
     "svelte-spa-router": "^3.2.0",
     "toastr": "^2.1.4"
