@@ -75,7 +75,7 @@
     
       h2{
         text-decoration: underline;
-        color:black;
+        color: rgb(26, 163, 255);
         font-size: 32px;
         text-align: center;
       }

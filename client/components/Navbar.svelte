@@ -16,7 +16,7 @@ nav{
     justify-content: end;
     align-items: center;
     margin:0;
-    background-color: rgb(122, 7, 97);
+    background-color: rgb(26, 163, 255);
     height: 40px;
 }
 
