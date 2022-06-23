@@ -8,7 +8,7 @@
         <a href="#/login" >Login</a>
         <a href="#/signup" >Sign Up</a>
  </div>
- 
+ <h2> In order to explore you favorite stats</h2>
  
 </main>
 
@@ -18,7 +18,8 @@
 
 div.buttons {
     font-size: 45px;
-    margin-left: 45px;
+    margin-left: 295px;
+   
 }
 
 h1 { color: #dcdf07;
@@ -32,6 +33,11 @@ h1 { color: #dcdf07;
    margin-top: 50px;
 }
 
+h2{
+   color: #dcdf07;
+   text-align: center;
+   font-size: 32px;
+}
 
 
 

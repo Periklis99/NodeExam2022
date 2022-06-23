@@ -94,7 +94,7 @@
 
     h1{
         text-decoration: underline;
-        color: rgb(158, 158, 176);
+        color: rgb(122, 7, 97);
         margin-top: 9%;
     }
          
