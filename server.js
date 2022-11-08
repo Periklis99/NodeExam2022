@@ -1,59 +1,42 @@
-const express = require("express");
+import express from "express";
+import session from "express-session";
+import path from "path";
+import http from "http";
+import { Server } from "socket.io";
 const app = express();
 
-const mongoose = require("mongoose");
-const passport = require("passport");
-const MongoStore = require ("connect-mongo");
-const session = require("express-session");
-const cors = require('cors');
-const User = require("./models/user");
-const helmet = require("helmet");
-require("dotenv").config();
+const server = http.createServer(app);
+const io = new Server(server);
+    io.on('connection', socket =>{
+    console.log("heyyyyy");
+    socket.on('addToCart', data => { //when i sent smt to cart this starts
+        console.log('malaka lars');
+        io.emit('addToCart', {message: `a user added ${data.itemName} to their cart`})                 // broadcastin=emit. emit to io=everybody(all sockets connected/to socket=one connection 
+    })
+})
 
-
-var http = require("http").createServer(app);
-var io = require("socket.io")(http, {
-    cors: {
-        origin: "http://localhost:8080",
-        methods: ["GET", "POST"]
-    }
-});
-
-http.listen(3536, function(){
-console.log("Successfully Connected Node Server");
-
- io.on("connection", function(socket){});
-});
-
-
-app.use(cors());
-app.use(helmet());
 app.use(express.json());
-app.use(express.static(__dirname+"/client/public"));
 
-mongoose.connect(process.env.DATABASE_URL, { useNewURLParser: true });
-const db = mongoose.connection;
-db.on("error", (error) => console.error(error));
-db.once("open", () => console.log("Connected to DB"));
+app.use(session({
+    secret: 'some secret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false },
+}));
 
-const sessionMiddleware = session({
-    resave:true,
-    saveUninitialized:true,
-    secret:"Lets go",
-    store: MongoStore.create({mongoUrl: process.env.DATABASE_URL})
-  })
-  app.use(sessionMiddleware);
- 
+import ItemRouter from "./routers/ItemRouter.js";
+app.use(ItemRouter);
+import Authentication from "./routers/Authentication.js";
+app.use(Authentication);
+import CartRouter from "./routers/CartRouter.js";
+app.use(CartRouter);
 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(express.static(path.resolve('./client/public')));
+// under routers , sending index.html to the client
+app.get('*', (req, res) => res.sendFile(path.resolve('./client/public/index.html')));
 
-const authRouter = require('./routes/auth.js');
-app.use('/api/auth',authRouter);
 
-/*app.listen(3536, () => {
-    console.log("Server started on port 3536");
-});*/
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log("Server is running on port", PORT)
+});

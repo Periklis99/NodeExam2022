@@ -1,109 +1,38 @@
 <script>
-    import { user } from "../src/stores"
-    import { push } from "svelte-spa-router";
-    import { onMount } from "svelte";
-    import Navbar from "../components/Navbar.svelte"
+import MainNav from "../components/MainNav.svelte";
+import Header from "../components/Header.svelte";
     
-    let userValue;
-
-    function redirect(url) {
-        push(url)
-    }
-    user.subscribe(value => {
-		userValue = value;
-	});
- 
-    async function fetchStats(){
-        try{
-        const response = await fetch ('https://app.sportdataapi.com/api/v1/soccer/players?apikey=7c8ff020-f174-11ec-8a36-9bc16174aee7&country_id=48&min_age=20&max_age=25')
-
-        if(!response.ok){
-            throw new Error(`Failed to fetch stats: ${response.status} `)
-        }
-        return response.json();
-     }catch(e){
-        console.log(e);
-    }
-    }
-        let players= [];
-
-    onMount(async() => {
-        const response = await fetch ('https://app.sportdataapi.com/api/v1/soccer/players?apikey=7c8ff020-f174-11ec-8a36-9bc16174aee7&country_id=48&min_age=20&max_age=25')
-
-        if(!response.ok){
-            throw new Error(`Failed to fetch stats: ${response.status} `)
-        }
-       const data = await response.json();
-       players = data.data;
-       console.log(players);
-    }
-
-    
-    )
-
-    </script>
-    <main>
-
-      
-
-    {#if !userValue}
-        <h1>Not logged in</h1>
-        <button on:click={() => redirect("/login")}>Login</button>
-
-    {:else}
-    <Navbar/>
-        <h1 >Welcome {userValue.email}</h1>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Height</th>
-                    <th>Country</th>
-                </tr>
-            </thead>
-            <tbody>
-                {#each players as player}
-                <tr>
-                    <td>{player.firstname} {player.lastname}</td>
-                    <td>{player.age}</td>
-                    <td>{player.height}</td>
-                    <td>{player.country.name}</td>
-                </tr>
-                {/each}
-            </tbody>
+  </script >
+<MainNav/>
+<Header/>
 
 
-        </table> 
+  <h1>Welcome to 'The Sports store'</h1>
+  <p>Signup or Login 
+      in order to explore to best sport equipment in town!</p>
 
-        
-    {/if}
 
 
-    </main>  
-    
-    
-    
-    <style>
-    
-    main{
-        text-align: center;
+<style>
 
-    }
+  h1{
+      font-family: Arial, Helvetica, sans-serif;
+     font-size: 30px; 
+     font-weight: 250;
+     max-width: 600px;
+     text-align: right;
+     margin-top:80px;
+  }
+  
+  p{
+     font-family: Arial, Helvetica, sans-serif;
+     font-size: 30px; 
+     font-weight: 250;
+     max-width: 600px;
+     text-align: right;
+  
+  }
+  
+  </style>
 
-    h1{
-        text-decoration: underline;
-        color: rgb(26, 163, 255);
-        margin-top: 9%;
-    }
-         
-    table,td{
-        border: 2px solid;
-        color:#dcdf07;
-    }
 
-    table{
-        margin: 0 auto;
-    }
-    </style>

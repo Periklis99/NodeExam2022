@@ -4,46 +4,15 @@
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>The Stats</title>
-
-	<link rel='icon' type='image/png' href='/favicon.png'>
+	<title>Sports store</title>
+	<link rel='icon' type='image/png' href='/client/public/icon.png'>
+	<link rel='stylesheet' href='/global.css'>
 	<link rel='stylesheet' href='/build/bundle.css'>
-	<script defer src='/build/bundle.js'></script>
-	<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css">
 
+	<script defer src='/build/bundle.js'></script>
 	
 </head>
-
 <body>
-<style>
-	
-	 div.cc-revoke{
-		position:fixed;
-		bottom:38px;
-	 }
-
-	div.cc-window{
-		width: 100%;
-		position:fixed;
-		bottom:0px;
-	}
-</style>
-
-	<script>
-		
-		window.cookieconsent.initialise({
-  container: document.getElementById("cookieconsent"),
-  palette:{
-    popup: { background: "#1aa3ff" },
-    button: { background: "#e0e0e0" },
-  },
-  revokable: true,
-  onStatusChange: function(status) {
-    console.log(this.hasConsented() ?
-    'enable cookies' : 'disable cookies');
-  },
-  "theme": "edgeless"
-});
-	</script>
 </body>
 </html>
